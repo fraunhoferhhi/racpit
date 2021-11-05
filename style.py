@@ -19,7 +19,6 @@ IMAGE_SIZE = 256
 BATCH_SIZE = 4
 LEARNING_RATE = 1e-3
 EPOCHS = 2
-STYLE_WEIGHT = 1e5
 CONTENT_WEIGHT = 1e0
 TV_WEIGHT = 1e-7
 
@@ -34,25 +33,6 @@ def train(args):
 
     # visualization of training controlled by flag
     visualize = (args.visualize != None)
-    if (visualize):
-        img_transform_512 = transforms.Compose([
-            transforms.Scale(512),                  # scale shortest side to image_size
-            transforms.CenterCrop(512),             # crop center image_size out
-            transforms.ToTensor(),                  # turn image from [0-255] to [0-1]
-            utils.normalize_tensor_transform()      # normalize with ImageNet values
-        ])
-
-        testImage_amber = utils.load_image("content_imgs/amber.jpg")
-        testImage_amber = img_transform_512(testImage_amber)
-        testImage_amber = Variable(testImage_amber.repeat(1, 1, 1, 1), requires_grad=False).type(dtype)
-
-        testImage_dan = utils.load_image("content_imgs/dan.jpg")
-        testImage_dan = img_transform_512(testImage_dan)
-        testImage_dan = Variable(testImage_dan.repeat(1, 1, 1, 1), requires_grad=False).type(dtype)
-
-        testImage_maine = utils.load_image("content_imgs/maine.jpg")
-        testImage_maine = img_transform_512(testImage_maine)
-        testImage_maine = Variable(testImage_maine.repeat(1, 1, 1, 1), requires_grad=False).type(dtype)
 
     # define network
     image_transformer = ImageTransformNet().type(dtype)
@@ -80,7 +60,6 @@ def train(args):
 
         # track values for...
         img_count = 0
-        aggregate_style_loss = 0.0
         aggregate_content_loss = 0.0
         aggregate_tv_loss = 0.0
 
@@ -138,17 +117,7 @@ def train(args):
                 if not os.path.exists("visualization/%s" %style_name):
                     os.makedirs("visualization/%s" %style_name)
 
-                outputTestImage_amber = image_transformer(testImage_amber).cpu()
-                amber_path = "visualization/%s/amber_%d_%05d.jpg" %(style_name, e+1, batch_num+1)
-                utils.save_image(amber_path, outputTestImage_amber.data[0])
-
-                outputTestImage_dan = image_transformer(testImage_dan).cpu()
-                dan_path = "visualization/%s/dan_%d_%05d.jpg" %(style_name, e+1, batch_num+1)
-                utils.save_image(dan_path, outputTestImage_dan.data[0])
-
-                outputTestImage_maine = image_transformer(testImage_maine).cpu()
-                maine_path = "visualization/%s/maine_%d_%05d.jpg" %(style_name, e+1, batch_num+1)
-                utils.save_image(maine_path, outputTestImage_maine.data[0])
+                pass
 
                 print("images saved")
                 image_transformer.train()
@@ -168,36 +137,6 @@ def train(args):
         image_transformer.cuda()
 
 
-def style_transfer(args):
-    # GPU enabling
-    if (args.gpu != None):
-        use_cuda = True
-        dtype = torch.cuda.FloatTensor
-        torch.cuda.set_device(args.gpu)
-        print("Current device: %d" %torch.cuda.current_device())
-
-    # content image
-    img_transform_512 = transforms.Compose([
-            transforms.Scale(512),                  # scale shortest side to image_size
-            transforms.CenterCrop(512),             # crop center image_size out
-            transforms.ToTensor(),                  # turn image from [0-255] to [0-1]
-            utils.normalize_tensor_transform()      # normalize with ImageNet values
-    ])
-
-    content = utils.load_image(args.source)
-    content = img_transform_512(content)
-    content = content.unsqueeze(0)
-    content = Variable(content).type(dtype)
-
-    # load style model
-    style_model = ImageTransformNet().type(dtype)
-    style_model.load_state_dict(torch.load(args.model_path))
-
-    # process input image
-    stylized = style_model(content).cpu()
-    utils.save_image(args.output, stylized.data[0])
-
-
 def main():
     parser = argparse.ArgumentParser(description='style transfer in pytorch')
     subparsers = parser.add_subparsers(title="subcommands", dest="subcommand")
@@ -207,21 +146,12 @@ def main():
     train_parser.add_argument("--gpu", type=int, default=None, help="ID of GPU to be used")
     train_parser.add_argument("--visualize", type=int, default=None, help="Set to 1 if you want to visualize training")
 
-    style_parser = subparsers.add_parser("transfer", help="do style transfer with a trained model")
-    style_parser.add_argument("--model-path", type=str, required=True, help="path to a pretrained model for a style image")
-    style_parser.add_argument("--source", type=str, required=True, help="path to source image")
-    style_parser.add_argument("--output", type=str, required=True, help="file name for stylized output image")
-    style_parser.add_argument("--gpu", type=int, default=None, help="ID of GPU to be used")
-
     args = parser.parse_args()
 
     # command
     if (args.subcommand == "train"):
         print("Training!")
         train(args)
-    elif (args.subcommand == "transfer"):
-        print("Style transfering!")
-        style_transfer(args)
     else:
         print("invalid command")
 
