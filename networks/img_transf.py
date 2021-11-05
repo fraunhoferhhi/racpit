@@ -55,7 +55,7 @@ class ResidualBlock(nn.Module):
 
 # Image Transform Network
 class ImageTransformNet(nn.Module):
-    def __init__(self):
+    def __init__(self, num_channels=3):
         super(ImageTransformNet, self).__init__()
         
         # nonlineraity
@@ -63,7 +63,7 @@ class ImageTransformNet(nn.Module):
         self.tanh = nn.Tanh()
 
         # encoding layers
-        self.conv1 = ConvLayer(3, 32, kernel_size=9, stride=1)
+        self.conv1 = ConvLayer(num_channels, 32, kernel_size=9, stride=1)
         self.in1_e = nn.InstanceNorm2d(32, affine=True)
 
         self.conv2 = ConvLayer(32, 64, kernel_size=3, stride=2)
@@ -86,8 +86,8 @@ class ImageTransformNet(nn.Module):
         self.deconv2 = UpsampleConvLayer(64, 32, kernel_size=3, stride=1, upsample=2 )
         self.in2_d = nn.InstanceNorm2d(32, affine=True)
 
-        self.deconv1 = UpsampleConvLayer(32, 3, kernel_size=9, stride=1)
-        self.in1_d = nn.InstanceNorm2d(3, affine=True)
+        self.deconv1 = UpsampleConvLayer(32, num_channels, kernel_size=9, stride=1)
+        self.in1_d = nn.InstanceNorm2d(num_channels, affine=True)
 
     def forward(self, x):
         # encode
@@ -109,3 +109,13 @@ class ImageTransformNet(nn.Module):
         y = self.deconv1(y)
 
         return y
+
+
+class MultiTransformNet(nn.Module):
+    def __init__(self, num_inputs=2, num_channels=1):
+        super(MultiTransformNet, self).__init__()
+        self.transformers = nn.ModuleList([ImageTransformNet(num_channels) for _ in range(num_inputs)])
+
+    def forward(self, inputs):
+        outputs = [trans(x) for x, trans in zip(inputs, self.transformers)]
+        return outputs
