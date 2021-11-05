@@ -11,8 +11,8 @@ from torchvision import datasets
 from torchvision import transforms
 
 import utils
-from network import ImageTransformNet
-from vgg import Vgg16
+from networks.img_transf import ImageTransformNet
+from networks.perceptual import Vgg16
 
 # Global Variables
 IMAGE_SIZE = 256
@@ -29,7 +29,7 @@ def train(args):
         use_cuda = True
         dtype = torch.cuda.FloatTensor
         torch.cuda.set_device(args.gpu)
-        print "Current device: %d" %torch.cuda.current_device()
+        print("Current device: %d" %torch.cuda.current_device())
 
     # visualization of training controlled by flag
     visualize = (args.visualize != None)
@@ -235,7 +235,7 @@ def main():
 
     # command
     if (args.subcommand == "train"):
-        print "Training!"
+        print("Training!")
         train(args)
     elif (args.subcommand == "transfer"):
         print "Style transfering!"
