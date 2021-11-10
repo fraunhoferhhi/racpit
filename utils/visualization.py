@@ -14,11 +14,12 @@ from utils import skeletons as sk
 # Put all visualizations here
 
 
-def spec_plot(ds, axes=None, cbar_global=None, **kwargs):
+def spec_plot(ds, axes=None, ax_xlabel=None, cbar_global=None, **kwargs):
     """
     Plot radar spectrograms using xarray functionality
     :param ds: xarray.Dataset with spectrograms to plot
     :param axes: Matplotlib Axes to plot onto. If not given, a new Matplotlib Figure will be created
+    :param axes: Matplotlib Axes where x label should be present. Default to the last Axes
     :param cbar_global: Title of a global colorbar
     :param kwargs: Keyword arguments for xarray.DataArray.plot
     :return: None
@@ -39,6 +40,8 @@ def spec_plot(ds, axes=None, cbar_global=None, **kwargs):
     if cbar_global:
         kwargs["add_colorbar"] = False
 
+    if ax_xlabel is None:
+        ax_xlabel = [axes[-1]]
     for ax, feat in zip(axes, ds.values()):
         plt.sca(ax)
         cbar_kwargs = {"label": f"Spectrogram [{feat.units}]"}
@@ -49,7 +52,7 @@ def spec_plot(ds, axes=None, cbar_global=None, **kwargs):
             pass
         feat.plot.imshow(x="time", cbar_kwargs=cbar_kwargs, **kwargs)
         ax.xaxis.set_major_formatter(mticker.FuncFormatter(format_seconds))
-        if ax != axes[-1]:
+        if ax not in ax_xlabel:
             ax.set_xlabel(None)
 
     fig.suptitle(title, wrap=True)
