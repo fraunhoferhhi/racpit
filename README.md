@@ -1,107 +1,127 @@
-# Style Transfer
+# RACPIT <img src="images/logo.png" height="150"/>
+[![NumPy](https://img.shields.io/badge/numpy-%23013243.svg?style=for-the-badge&logo=numpy&logoColor=white)][numpy]
+[![PyTorch](https://img.shields.io/badge/PyTorch-%23EE4C2C.svg?style=for-the-badge&logo=PyTorch&logoColor=white)][pytorch]
+[![Pandas](https://img.shields.io/badge/pandas-%23150458.svg?style=for-the-badge&logo=pandas&logoColor=white)][pandas]
 
-## Descriptions
-This project is a PyTorch implementation of [Perceptual Losses for Real-Time Style Transfer and Super-Resolution](https://arxiv.org/abs/1603.08155). This paper trains an **image transformation network** to perform style transfer as opposed to optimizing along the manifold of images as originally propsed by [Gatys et al.](https://arxiv.org/abs/1508.06576).
+This project serves as supplementary material for our publication
+_"RACPIT: Improving Radar Human Activity Classification
+Using Synthetic Data with Image Transformation"_
+(to be submitted at [MDPI Sensors' Special Issues "Advances in Radar Sensors"](https://www.mdpi.com/journal/sensors/special_issues/radar_application)).
+Our focus here lies in human activity classification using
+[FMCW radar](https://www.infineon.com/dgdl/Infineon-Radar%20vs%20PIR%20BGT24LTR11-PI-v01_00-EN.pdf?fileId=5546d462576f34750157d2b1d6d27370)
+and how to enhance it using synthetic data.
 
-The image transformation network is shown below. For a given style image, the network is trained using the [MS-COCO dataset](http://cocodataset.org/#download) to minimize perceptual loss while being regularized by total variation. Perceptual loss is defined by the combination of feature reconstruction loss as well as the style reconstruction loss from pretrained layers of VGG16. The feature reconstruction loss is the mean squared error between feature representations, while the style reconstruction loss is the squared Frobenius norm of the difference between the Gram matrices of the feature maps.
+## Background
 
-<img src="figure/model.png" height="300"/>
+### Radar data
 
-## Prerequisites
-- Python 2.7
-- [PyTorch 0.2.0](http://pytorch.org/)
-- [NumPy](http://www.numpy.org/)
-- [PIL](http://pillow.readthedocs.io/en/3.1.x/installation.html)
+We use **Range Doppler Maps (RDMs)**
+as a basis for our input data. These can be either real data acquired
+with Infineon's
+[Radar sensors for IoT](https://www.infineon.com/cms/en/product/sensor/radar-sensors/radar-sensors-for-iot/)
+or simulated using a kinematic data with the following model:
 
-## Usage
-### Train
+<div align=center><img src="https://render.githubusercontent.com/render/math?math=\Large s\left(t\right)=\sum_{k=1}^K{\sqrt{\frac{A_{k,t}}{L_{k,t}}}\sin{\left(2\pi f_{k,t}t%2B\phi_{k,t}\right)}}">
+</div>
 
-You can train a model for a given style image with the following command:
+<img src="https://render.githubusercontent.com/render/math?math=A_{k,t}">,
+<img src="https://render.githubusercontent.com/render/math?math=L_{k,t}">,
+<img src="https://render.githubusercontent.com/render/math?math=f_{k,t}"> and
+<img src="https://render.githubusercontent.com/render/math?math=\phi_{k,t}">
+represent the radar cross section, free-space path loss,
+instant frequency and instant phase, respectively,
+of the returned and mixed-down signal for every modelled human limb
+<img src="https://render.githubusercontent.com/render/math?math=k">
+and instant
+<img src="https://render.githubusercontent.com/render/math?math=t">.
+The latter three parameters depend
+on the instantaneous distance of the limb to the radar sensor
+and are calculated using the customary
+[radar](https://www.radartutorial.eu/01.basics/The%20Radar%20Range%20Equation.en.html) and
+[FMCW](https://www.radartutorial.eu/02.basics/Frequency%20Modulated%20Continuous%20Wave%20Radar.en.html)
+equations.
+
+![Simulation animation](images/real_synth_skeleton.gif)
+
+We further preprocess the RDMs by stacking them and summing over Doppler and range axis
+to obtain range and Doppler spectrograms, respectively:
+
+![Radar spectrogram extraction](images/rdm2RDspects.gif)
+
+### Deep learning
+
+We train our image transformation networks with an adapted version of
+[Perceptual Losses for Real-Time Style Transfer and Super-Resolution][perceptual].
+
+[perceptual]: https://arxiv.org/abs/1603.08155
+
+<img src="images/model.png" height="300"/>
+
+Since we are working with radar data, we substitute VGG16 as the perceptual network
+with our two-branch convolutional neural network from
+[Domain Adaptation Across Configurations of FMCW Radar for Deep Learning Based Human Activity Classification](https://doi.org/10.23919/IRS51887.2021.9466179)
+
+<img src="images/cnn.png" height="600"/>
+
+If we train with real data as our input and synthetic data as our ground truth,
+we obtain a denoising behavior for the image transformation networks.
+
+<img src="images/spectrograms.png" width="650"/>
+
+## Implementation
+
+The code has been written for
+PyTorch based on
+[Daniel Yang's implementation](https://github.com/dxyang/StyleTransfer)
+of [Perceptual loss][perceptual].
+
+Data preprocessing is heavily based on
+*x*array. You can take a closer look at it
+in our
+[example notebook](notebooks/visualize.ipynb).
+
+### Prerequisites
+- [Python 3.8](https://www.python.org/)
+- [PyTorch 1.7.0][pytorch]
+- [*x*array](https://xarray.pydata.org)
+- [NumPy][numpy]
+- [Pandas][pandas]
+- [Matplotlib](https://matplotlib.org/)
+- [Cuda 11.0](https://developer.nvidia.com/cuda-11.0-download-archive)
+(For GPU training)
+
+[numpy]: http://www.numpy.org/
+[pytorch]: http://pytorch.org/
+[pandas]: https://pandas.pydata.org/
+
+### Usage
+
+Radar data can be batch-preprocessed and stored
+for faster training:
 
 ```bash
-$ python style.py train --style-image "path_to_style_image" --dataset "path_to_coco"
+$ python utils/preprocess.py --raw "/path/to/data/raw" --output "/path/to/data/real" --value "db" --marginalize "incoherent"
+$ python utils/preprocess.py --raw "/path/to/data/raw" --output "/path/to/data/synthetic" --synthetic --value "db" --marginalize "incoherent"
 ```
 
-Here are some options that you can use:
-* `--gpu`: id of the GPU you want to use (if not specified, will train on CPU)
-* `--visualize`: visualize the style transfer of a predefined image every 1000 iterations during the training process in a folder called "visualize"
-
-So to train on a GPU with mosaic.jpg as my style image, MS-COCO downloaded into a folder named coco, and wanting to visualize a sample image throughout training, I would use the following command: 
+After this, you can train your CNN, that will serve as a perceptual network:
 
 ```bash
-$ python style.py train --style-image style_imgs/mosaic.jpg --dataset coco --gpu 1 --visualize 1
+$ python main.py --log "cnn" train-classify --range --config "I" --gpu 0 --no-split --dataset "/path/to/data/synthetic"
 ```
 
-### Evaluation
-
-You can stylize an image with a pretraind model with the following command. Pretrained models for mosaic.jpg and udine.jpg are provided.
+Then you can train the image transformation networks:
 
 ```bash
-$ python style.py transfer --model-path "path_to_pretrained_model_image" --source "path_to_source_image" --target "name_of_target_image"
+$ python main.py --log "trans" train-transfer --range --config "I" --gpu 0 --visualize 5 --input "/path/to/data/real" --output "/path/to/data/synthetic" --recordings first --model "models/cnn.model"
 ```
 
-You can also specify if you would like to run on a GPU:
-* `--gpu`: id of the GPU you want to use (if not specified, will train on CPU)
-
-For example, to transfer the style of mosaic.jpg onto maine.jpg on a GPU, I would use:
+And finally test the whole pipeline:
 
 ```bash
-$ python style.py transfer --model-path model/mosaic.model --source content_imgs/maine.jpg --target maine_mosaic.jpg --gpu 1
+$ python main.py test --range --config "I" --gpu 0 --visualize 10 --dataset "/path/to/data/real" --recordings last --transformer "models/trans.model" --model "models/cnn.model"
 ```
 
-## Results
-### Mosaic
-Model trained on mosaic.jpg applied to a few images: 
-<p align="center">
-    <img src="style_imgs/mosaic.jpg" height="200px">
-</p>
+## Citation:
 
-<p align="center">
-    <img src="content_imgs/amber.jpg" height="200px">
-    <img src="content_imgs/dan.jpg" height="200px">
-    <img src="content_imgs/maine.jpg" height="200px">
-</p>
-
-<p align="center">
-    <img src="figure/mosaic_amber.jpg" height="200px">
-    <img src="figure/mosaic_dan.jpg" height="200px">
-    <img src="figure/mosaic_maine.jpg" height="200px">
-</p>
-
-And here is a GIF showing how the output changes during the training process. Notably, the network generates qualitatively appealing output within a 1000 iterations.
-
-<p align="center">
-    <img src="figure/mosaic_amber.gif" height="200px">
-    <img src="figure/mosaic_dan.gif" height="200px">
-    <img src="figure/mosaic_maine.gif" height="200px">
-</p>
-
-
-### Udine
-Model trained on udine.jpg applied to a few images: 
-<p align="center">
-    <img src="style_imgs/udnie.jpg" height="200px">
-</p>
-
-<p align="center">
-    <img src="content_imgs/amber.jpg" height="200px">
-    <img src="content_imgs/dan.jpg" height="200px">
-    <img src="content_imgs/maine.jpg" height="200px">
-</p>
-
-<p align="center">
-    <img src="figure/udnie_amber.jpg" height="200px">
-    <img src="figure/udnie_dan.jpg" height="200px">
-    <img src="figure/udnie_maine.jpg" height="200px">
-</p>
-
-And here is a GIF showing how the output changes during the training process. Notably, the network generates qualitatively appealing output within a 1000 iterations.
-
-<p align="center">
-    <img src="figure/udnie_amber.gif" height="200px">
-    <img src="figure/udnie_dan.gif" height="200px">
-    <img src="figure/udnie_maine.gif" height="200px">
-</p>
-
-## Acknowledgements
-* This repo is based on code found in [this PyTorch example repo](https://github.com/pytorch/examples/tree/master/fast_neural_style)
+Once the paper has been submitted and accepted, the BibTex citation will appear here.
