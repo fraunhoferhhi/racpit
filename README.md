@@ -8,7 +8,7 @@ _"RACPIT: Improving Radar Human Activity Classification
 Using Synthetic Data with Image Transformation"_
 (to be submitted at [MDPI Sensors' Special Issues "Advances in Radar Sensors"](https://www.mdpi.com/journal/sensors/special_issues/radar_application)).
 Our focus here lies in human activity classification using
-[FMCW radar](https://www.infineon.com/dgdl/Infineon-Radar%20vs%20PIR%20BGT24LTR11-PI-v01_00-EN.pdf?fileId=5546d462576f34750157d2b1d6d27370)
+[FMCW radar](https://www.infineon.com/dgdl/Infineon-Radar%20FAQ-PI-v02_00-EN.pdf?fileId=5546d46266f85d6301671c76d2a00614)
 and how to enhance it using synthetic data.
 
 ## Background
