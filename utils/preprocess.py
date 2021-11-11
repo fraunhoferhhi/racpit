@@ -41,7 +41,7 @@ _radar_transformations = {
 _radar_val_keys = tuple(_radar_transformations.keys())
 _radar_val_default = _radar_val_keys[-1]
 
-configs = pd.read_csv(_configs_path, index_col=0, sep=";").T
+configs = pd.read_csv(_configs_path, index_col=0, sep=",").T
 config_names = configs.index
 
 
