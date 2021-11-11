@@ -55,18 +55,18 @@ We train our image transformation networks with an adapted version of
 
 [perceptual]: https://arxiv.org/abs/1603.08155
 
-<img src="images/model.png" height="300"/>
+![RACPIT model](images/model.png)
 
 Since we are working with radar data, we substitute VGG16 as the perceptual network
 with our two-branch convolutional neural network from
 [Domain Adaptation Across Configurations of FMCW Radar for Deep Learning Based Human Activity Classification](https://doi.org/10.23919/IRS51887.2021.9466179)
 
-<img src="images/cnn.png" height="600"/>
+<img src="images/cnn.png" width="70%"/>
 
 If we train with real data as our input and synthetic data as our ground truth,
 we obtain a denoising behavior for the image transformation networks.
 
-<img src="images/spectrograms.png" width="650"/>
+<img src="images/spectrograms.png" width="70%"/>
 
 ## Implementation
 
