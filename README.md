@@ -78,7 +78,7 @@ of [Perceptual loss][perceptual].
 Data preprocessing is heavily based on
 *x*array. You can take a closer look at it
 in our
-[example notebook](notebooks/visualize.ipynb).
+[example](./visualize).
 
 ### Prerequisites
 - [Python 3.8](https://www.python.org/)
