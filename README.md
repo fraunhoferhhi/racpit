@@ -4,9 +4,11 @@
 [![Pandas](https://img.shields.io/badge/pandas-%23150458.svg?style=for-the-badge&logo=pandas&logoColor=white)][pandas]
 
 This project serves as supplementary material for our publication
-_"RACPIT: Improving Radar Human Activity Classification
-Using Synthetic Data with Image Transformation"_
-(to be submitted at [MDPI Sensors' Special Issues "Advances in Radar Sensors"](https://www.mdpi.com/journal/sensors/special_issues/radar_application)).
+_"Improving Radar Human Activity Classification
+Using Synthetic Data with Image Transformation"_,
+where we introduce **RACPIT**:
+Radar Activity Classification with Perceptual Image Transformation
+(under review, submitted to [MDPI Sensors' Special Issues "Advances in Radar Sensors"](https://www.mdpi.com/journal/sensors/special_issues/radar_application)).
 Our focus here lies in human activity classification using
 [FMCW radar](https://www.infineon.com/dgdl/Infineon-Radar%20FAQ-PI-v02_00-EN.pdf?fileId=5546d46266f85d6301671c76d2a00614)
 and how to enhance it using synthetic data.
@@ -21,7 +23,9 @@ with Infineon's
 [Radar sensors for IoT](https://www.infineon.com/cms/en/product/sensor/radar-sensors/radar-sensors-for-iot/)
 or simulated using a kinematic data with the following model:
 
-<div align=center><img src="https://render.githubusercontent.com/render/math?math=\Large s\left(t\right)=\sum_{k=1}^K{\sqrt{\frac{A_{k,t}}{L_{k,t}}}\sin{\left(2\pi f_{k,t}t%2B\phi_{k,t}\right)}}">
+<div align=center>
+<img src="https://render.githubusercontent.com/render/math?math=\Large s\left(t\right)=\sum_{k=1}^K{\sqrt{\frac{A_{k,t}}{L_{k,t}}}\sin{\left(2\pi f_{k,t}t%2B\phi_{k,t}\right)}}">
+<img src="images/mannequin.png" width="70%" alt="Human reflection model"/>
 </div>
 
 <img src="https://render.githubusercontent.com/render/math?math=A_{k,t}">,
@@ -124,4 +128,4 @@ $ python main.py test --range --config "I" --gpu 0 --visualize 10 --dataset "/pa
 
 ## Citation:
 
-Once the paper has been submitted and accepted, the BibTex citation will appear here.
+Once the paper has been reviewed and accepted, the BibTex citation will appear here.
