@@ -39,7 +39,8 @@ of the returned and mixed-down signal for every modelled human limb
 and instant
 <img src="https://render.githubusercontent.com/render/math?math=t">.
 The latter three parameters depend
-on the instantaneous distance of the limb to the radar sensor
+on the instantaneous distance of the limb to the radar sensor,
+<img src="https://render.githubusercontent.com/render/math?math=d_{k,t}">,
 and are calculated using the customary
 [radar](https://www.radartutorial.eu/01.basics/The%20Radar%20Range%20Equation.en.html) and
 [FMCW](https://www.radartutorial.eu/02.basics/Frequency%20Modulated%20Continuous%20Wave%20Radar.en.html)
