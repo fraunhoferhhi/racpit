@@ -3,15 +3,18 @@
 [![PyTorch](https://img.shields.io/badge/PyTorch-%23EE4C2C.svg?style=for-the-badge&logo=PyTorch&logoColor=white)][pytorch]
 [![Pandas](https://img.shields.io/badge/pandas-%23150458.svg?style=for-the-badge&logo=pandas&logoColor=white)][pandas]
 
-This project serves as supplementary material for our publication
-_"Improving Radar Human Activity Classification
-Using Synthetic Data with Image Transformation"_,
-where we introduce **RACPIT**:
-Radar Activity Classification with Perceptual Image Transformation
-(under review, submitted to [MDPI Sensors' Special Issues "Advances in Radar Sensors"](https://www.mdpi.com/journal/sensors/special_issues/radar_application)).
-Our focus here lies in human activity classification using
+This repository contains supplementary material for our article
+["Improving Radar Human Activity Classification
+Using Synthetic Data with Image Transformation"](https://www.mdpi.com/1424-8220/22/4/1519),
+published in
+[MDPI Sensors](https://www.mdpi.com/journal/sensors)
+as part of the
+[Special Issue "Advances in Radar Sensors"](https://www.mdpi.com/journal/sensors/special_issues/radar_application). 
+There we introduce **RACPIT**:
+Radar Activity Classification with Perceptual Image Transformation,
+a deep-learning approach to human activity classification using
 [FMCW radar](https://www.infineon.com/dgdl/Infineon-Radar%20FAQ-PI-v02_00-EN.pdf?fileId=5546d46266f85d6301671c76d2a00614)
-and how to enhance it using synthetic data.
+and enhanced with synthetic data.
 
 ## Background
 
@@ -21,7 +24,7 @@ We use **Range Doppler Maps (RDMs)**
 as a basis for our input data. These can be either real data acquired
 with Infineon's
 [Radar sensors for IoT](https://www.infineon.com/cms/en/product/sensor/radar-sensors/radar-sensors-for-iot/)
-or simulated using a kinematic data with the following model:
+or synthetic using kinematic data with the following model:
 
 <div align=center>
 <img src="https://render.githubusercontent.com/render/math?math=\Large s\left(t\right)=\sum_{k=1}^K{\sqrt{\frac{A_{k,t}}{L_{k,t}}}\sin{\left(2\pi f_{k,t}t%2B\phi_{k,t}\right)}}">
@@ -64,11 +67,11 @@ We train our image transformation networks with an adapted version of
 
 Since we are working with radar data, we substitute VGG16 as the perceptual network
 with our two-branch convolutional neural network from
-[Domain Adaptation Across Configurations of FMCW Radar for Deep Learning Based Human Activity Classification](https://doi.org/10.23919/IRS51887.2021.9466179)
+[Domain Adaptation Across Configurations of FMCW Radar for Deep Learning Based Human Activity Classification](https://doi.org/10.23919/IRS51887.2021.9466179).
 
 <img src="images/cnn.png" width="70%"/>
 
-If we train with real data as our input and synthetic data as our ground truth,
+If we train the image transformation networks with real data as our input and synthetic data as our ground truth,
 we obtain a denoising behavior for the image transformation networks.
 
 <img src="images/spectrograms.png" width="70%"/>
@@ -127,6 +130,23 @@ And finally test the whole pipeline:
 $ python main.py test --range --config "I" --gpu 0 --visualize 10 --dataset "/path/to/data/real" --recordings last --transformer "models/trans.model" --model "models/cnn.model"
 ```
 
-## Citation:
+## Citation
 
-Once the paper has been reviewed and accepted, the BibTex citation will appear here.
+If you use RACPIT's code or you take the publication as a reference for your research,
+please cite our work in the following way:
+
+```bibtex
+
+@Article{s22041519,
+AUTHOR = {Hernang{\'o}mez, Rodrigo and Visentin, Tristan and Servadei, Lorenzo and Khodabakhshandeh, Hamid and Sta{\'n}czak, S{\l}awomir},
+TITLE = {Improving Radar Human Activity Classification Using Synthetic Data with Image Transformation},
+JOURNAL = {Sensors},
+VOLUME = {22},
+YEAR = {2022},
+NUMBER = {4},
+ARTICLE-NUMBER = {1519},
+URL = {https://www.mdpi.com/1424-8220/22/4/1519},
+ISSN = {1424-8220},
+DOI = {10.3390/s22041519}
+}
+```
