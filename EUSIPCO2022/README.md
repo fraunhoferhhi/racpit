@@ -1,6 +1,6 @@
 # Unsupervised Domain Adaptation across FMCW Radar Configurations Using Margin Disparity Discrepancy
 
-The content of thjs page serves as additional material to the presentation of our work at [EUSIPCO2022](https://2022.eusipco.org/) in Belgrade. A [preprint][preprint] is available on arxiv.org.
+The content of this page serves as additional material to the presentation of our work at [EUSIPCO2022](https://2022.eusipco.org/) in Belgrade. A [preprint][preprint] is available on arxiv.org.
 
 [preprint]: https://arxiv.org/abs/2203.04588
 
