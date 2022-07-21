@@ -1,6 +1,5 @@
 ---
 title: Dummy
-description: Description
 ---
 
 If you are interested in our work, you can take a look at our [preprint][preprint] on arxiv.org.
