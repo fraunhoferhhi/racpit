@@ -82,7 +82,7 @@ than a convex relaxation of the ramp loss.
 
 ![Different loss functions](images/losses.svg)
 
-# References
+## References
 
 1.  Zhang, Y., Liu, T., Long, M. and Jordan, M. (2019) ‘Bridging Theory and Algorithm for Domain Adaptation’, in _International Conference on Machine Learning_. _International Conference on Machine Learning_, PMLR, pp. 7404–7413. Available at: http://proceedings.mlr.press/v97/zhang19i.html.
 2.  Liang, X., Wang, X., Lei, Z., Liao, S. and Li, S.Z. (2017) ‘Soft-Margin Softmax for Deep Classification’, in D. Liu, S. Xie, Y. Li, D. Zhao, and E.-S.M. El-Alfy (eds) _Neural Information Processing_. Cham: Springer International Publishing (Lecture Notes in Computer Science), pp. 413–421. Available at: https://doi.org/10.1007/978-3-319-70096-0_43.
