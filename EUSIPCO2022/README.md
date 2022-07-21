@@ -1,12 +1,10 @@
 # Unsupervised Domain Adaptation across FMCW Radar Configurations Using Margin Disparity Discrepancy
 
-The content of this page serves as additional material to the presentation of our work at [EUSIPCO2022](https://2022.eusipco.org/) in Belgrade. A [preprint][preprint] is available on arxiv.org.
+The content of this page serves as supplementary material to the presentation of our work at [EUSIPCO2022](https://2022.eusipco.org/) in Belgrade. A [preprint][preprint] is also available.
 
 [preprint]: https://arxiv.org/abs/2203.04588
 
-## Additional notes
-
-### Radar ML
+## Radar ML
 
 Radar sensing has gained research interst over the past few years due to several
 factors. On the one hand, semiconductor companies have managed to produce highly
@@ -24,7 +22,7 @@ recognition, and it presents some advantages to cameras when
 it comes to privacy concerns and ill-posed optical scenarios, including
 through-wall and bad-lighting situations.
 
-#### Signal preprocessing
+### Signal preprocessing
 
 Range and speed (also known as Doppler shift) of FMCW radar targets can
 be explored through so-called Range-Doppler maps, which convey information
@@ -40,7 +38,7 @@ them through two separate branches convolutional layers.
 
 ![CNN architecture details](images/cnn.svg)
 
-### Domain adaptation
+## Domain adaptation
 
 The complexity of the classification of radar signatures has driven radar approaches to
 resort to machine learning and deep learning techniques that require
@@ -60,7 +58,7 @@ moved on to the more demanding situation where the target data is
 provided without labels from the label space, also called **unsupervised
 domain adaptation**.
 
-#### Margin Disparity Discrepancy 
+### Margin Disparity Discrepancy 
 
 The unsupervised domain adaptation
 method we have used is called Margin Disparity Discrepancy (MDD) and it has been recently
