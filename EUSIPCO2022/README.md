@@ -1,14 +1,12 @@
----
-title: Dummy
----
+# Unsupervised Domain Adaptation across FMCW Radar Configurations Using Margin Disparity Discrepancy
 
-If you are interested in our work, you can take a look at our [preprint][preprint] on arxiv.org.
+The content of thjs page serves as additional material to the presentation of our work at [EUSIPCO2022](https://2022.eusipco.org/) in Belgrade. A [preprint][preprint] is available on arxiv.org.
 
 [preprint]: https://arxiv.org/abs/2203.04588
 
-# Additional notes
+## Additional notes
 
-## Radar ML
+### Radar ML
 
 Radar sensing has gained research interst over the past few years due to several
 factors. On the one hand, semiconductor companies have managed to produce highly
@@ -20,13 +18,13 @@ developed by Infineon that lies at the core of Google's [Soli Project](https://a
 
 ![Google's Soli Project](images/soli.gif)
 
-On the other hand, radar enables some interesting commercial
-applications, such as human activity and surveillance or hand gesture
+On the other hand, radar sensors enable interesting
+[IoT applications](https://www.infineon.com/cms/en/product/sensor/radar-sensors/radar-sensors-for-iot/), such as human activity and surveillance or hand gesture
 recognition, and it presents some advantages to cameras when
 it comes to privacy concerns and ill-posed optical scenarios, including
 through-wall and bad-lighting situations.
 
-### Signal preprocessing
+#### Signal preprocessing
 
 Range and speed (also known as Doppler shift) of FMCW radar targets can
 be explored through so-called Range-Doppler maps, which convey information
@@ -42,7 +40,7 @@ them through two separate branches convolutional layers.
 
 ![CNN architecture details](images/cnn.svg)
 
-## Domain adaptation
+### Domain adaptation
 
 The complexity of the classification of radar signatures has driven radar approaches to
 resort to machine learning and deep learning techniques that require
@@ -62,7 +60,7 @@ moved on to the more demanding situation where the target data is
 provided without labels from the label space, also called **unsupervised
 domain adaptation**.
 
-### Margin Disparity Discrepancy 
+#### Margin Disparity Discrepancy 
 
 The unsupervised domain adaptation
 method we have used is called Margin Disparity Discrepancy (MDD) and it has been recently
