@@ -12,7 +12,8 @@ integrated radar chipsets thanks to the
 [Frequency-modulated continuous
 wave (FMCW)](https://www.infineon.com/dgdl/Infineon-Radar%20FAQ-PI-v02_00-EN.pdf?fileId=5546d46266f85d6301671c76d2a00614) technology. An example of this is the
 [60 GHz sensor frontend](https://www.infineon.com/cms/en/product/promopages/60GHz/)
-developed by Infineon that lies at the core of Google's [Soli Project](https://atap.google.com/soli/).
+developed by [Infineon](https://www.infineon.com/)
+that lies at the core of Google's [Soli Project](https://atap.google.com/soli/).
 
 ![Google's Soli Project](images/soli.gif)
 
@@ -21,6 +22,10 @@ On the other hand, radar sensors enable interesting
 recognition, and it presents some advantages to cameras when
 it comes to privacy concerns and ill-posed optical scenarios, including
 through-wall and bad-lighting situations.
+
+All the data used in this work has been recorded with Infineon's
+[BGT60TR13C](https://www.infineon.com/cms/en/product/sensor/radar-sensors/radar-sensors-for-iot/60ghz-radar/bgt60tr13c/)
+radar sensors.
 
 ### Signal preprocessing
 
