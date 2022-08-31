@@ -72,7 +72,7 @@ computer vision datasets. The authors have proved that the true error in the
 target domain can be bounded by the empirical error in the source domain
 plus a residual ideal loss and the so-called MDD term.
 
-As a small theoretical contribution to MDD, we have managed to upper
+As a small **theoretical contribution to MDD**, we have managed to upper
 bound the empirical source error from the original, which originally
 uses the ramp loss, by its cross-entropy counterpart.
 This is important since the ramp loss is non-convex und thus unpractical for ML training.
