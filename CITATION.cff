@@ -1,0 +1,47 @@
+cff-version: 1.2.0
+message: "If you use RACPIT's code or you take the publication as a reference for your research, please cite it using the preferred-citation information."
+authors:
+- family-names: Hernangómez
+  given-names: Rodrigo
+  orcid: https://orcid.org/0000-0002-1284-4951
+  affiliation: Fraunhofer Heinrich Hertz Institute
+- family-names: Visentin
+  given-names: Tristan
+  affiliation: Fraunhofer Heinrich Hertz Institute
+- family-names: Servadei
+  given-names: Lorenzo
+  affiliation: Infineon Technologies AG
+- family-names: Stanczak
+  given-names: Slawomir
+  affiliation: Fraunhofer Heinrich Hertz Institute
+title: "Code and additional information to 'RACPIT: Improving Radar Human Activity Classification Using Synthetic Data with Image Transformation'"
+version: 1.0.0
+doi: 10.3390/s22041519
+url: "https://www.mdpi.com/1424-8220/22/4/1519"
+preferred-citation:
+  type: article
+  title: 'Improving Radar Human Activity Classification Using Synthetic Data with Image Transformation'
+  abstract: 
+  authors:
+  - family-names: Hernangómez
+    given-names: Rodrigo
+    orcid: https://orcid.org/0000-0002-1284-4951
+    affiliation: Fraunhofer Heinrich Hertz Institute
+  - family-names: Visentin
+    given-names: Tristan
+    affiliation: Fraunhofer Heinrich Hertz Institute
+  - family-names: Servadei
+    given-names: Lorenzo
+    affiliation: Infineon Technologies AG
+  - family-names: Stanczak
+    given-names: Slawomir
+    affiliation: Fraunhofer Heinrich Hertz Institute
+  year: 2022
+  month: 1
+  volume: 22
+  issue: 4
+  start: 1519
+  issn: '1424-8220'
+  journal: Sensors
+  doi: "10.3390/s22041519"
+
