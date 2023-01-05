@@ -10,9 +10,14 @@ authors:
   affiliation: Fraunhofer Heinrich Hertz Institute
 - family-names: Servadei
   given-names: Lorenzo
+  orcid: https://orcid.org/0000-0003-4322-834X
   affiliation: Infineon Technologies AG
+- family-names: Khodabakhshandeh
+  given-names: Hamid
+  affiliation: Fraunhofer Heinrich Hertz Institute
 - family-names: Stanczak
   given-names: Slawomir
+  orcid: https://orcid.org/0000-0003-3829-4668
   affiliation: Fraunhofer Heinrich Hertz Institute
 title: "Code and additional information to 'RACPIT: Improving Radar Human Activity Classification Using Synthetic Data with Image Transformation'"
 version: 1.0.0
@@ -32,9 +37,14 @@ preferred-citation:
     affiliation: Fraunhofer Heinrich Hertz Institute
   - family-names: Servadei
     given-names: Lorenzo
+    orcid: https://orcid.org/0000-0003-4322-834X
     affiliation: Infineon Technologies AG
+  - family-names: Khodabakhshandeh
+    given-names: Hamid
+    affiliation: Fraunhofer Heinrich Hertz Institute
   - family-names: Stanczak
     given-names: Slawomir
+    orcid: https://orcid.org/0000-0003-3829-4668
     affiliation: Fraunhofer Heinrich Hertz Institute
   year: 2022
   month: 1
