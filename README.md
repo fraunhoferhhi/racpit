@@ -26,24 +26,25 @@ with Infineon's
 [Radar sensors for IoT](https://www.infineon.com/cms/en/product/sensor/radar-sensors/radar-sensors-for-iot/)
 or synthetic using kinematic data with the following model:
 
+$\Large s\left(t\right)=\sum_{k}{\sqrt{\frac{A_{k,t}}{L_{k,t}}}\sin{\left(2\pi f_{k,t}t+\phi_{k,t}\right)}}$
+
 <div align=center>
-<img src="https://render.githubusercontent.com/render/math?math=\Large s\left(t\right)=\sum_{k=1}^K{\sqrt{\frac{A_{k,t}}{L_{k,t}}}\sin{\left(2\pi f_{k,t}t%2B\phi_{k,t}\right)}}">
 <img src="images/mannequin.png" width="70%" alt="Human reflection model"/>
 </div>
 
-<img src="https://render.githubusercontent.com/render/math?math=A_{k,t}">,
-<img src="https://render.githubusercontent.com/render/math?math=L_{k,t}">,
-<img src="https://render.githubusercontent.com/render/math?math=f_{k,t}"> and
-<img src="https://render.githubusercontent.com/render/math?math=\phi_{k,t}">
+$A_{k,t}$,
+$L_{k,t}$,
+$f_{k,t}$ and
+$\phi_{k,t}$
 represent the radar cross section, free-space path loss,
 instant frequency and instant phase, respectively,
 of the returned and mixed-down signal for every modelled human limb
-<img src="https://render.githubusercontent.com/render/math?math=k">
+$k$
 and instant
-<img src="https://render.githubusercontent.com/render/math?math=t">.
+$t$.
 The latter three parameters depend
 on the instantaneous distance of the limb to the radar sensor,
-<img src="https://render.githubusercontent.com/render/math?math=d_{k,t}">,
+$d_{k,t}$,
 and are calculated using the customary
 [radar](https://www.radartutorial.eu/01.basics/The%20Radar%20Range%20Equation.en.html) and
 [FMCW](https://www.radartutorial.eu/02.basics/Frequency%20Modulated%20Continuous%20Wave%20Radar.en.html)
