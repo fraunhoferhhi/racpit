@@ -137,7 +137,6 @@ If you use RACPIT's code or you take the publication as a reference for your res
 please cite our work in the following way:
 
 ```bibtex
-
 @Article{s22041519,
 AUTHOR = {Hernang{\'o}mez, Rodrigo and Visentin, Tristan and Servadei, Lorenzo and Khodabakhshandeh, Hamid and Sta{\'n}czak, S{\l}awomir},
 TITLE = {Improving Radar Human Activity Classification Using Synthetic Data with Image Transformation},
