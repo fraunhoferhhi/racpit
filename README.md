@@ -13,7 +13,7 @@ as part of the
 There we introduce **RACPIT**:
 Radar Activity Classification with Perceptual Image Transformation,
 a deep-learning approach to human activity classification using
-[FMCW radar](https://www.infineon.com/dgdl/Infineon-Radar%20FAQ-PI-v02_00-EN.pdf?fileId=5546d46266f85d6301671c76d2a00614)
+[FMCW radar](https://community.infineon.com/t5/Knowledge-Base-Articles/Understanding-FMCW-Radars-Features-and-operational-principles/ta-p/767198)
 and enhanced with synthetic data.
 
 ## Background
